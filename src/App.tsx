@@ -7,16 +7,21 @@ import Room from "components/Room";
 function App() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
+  const [showChat, setShowChat] = useState(false);
 
   return (
     <div className="App">
-      <Room
-        username={username}
-        setUsername={setUsername}
-        room={room}
-        setRoom={setRoom}
-      />
-      <Chat socket={socket} username={username} room={room} />
+      {!showChat ? (
+        <Room
+          username={username}
+          setUsername={setUsername}
+          room={room}
+          setRoom={setRoom}
+          setShowChat={setShowChat}
+        />
+      ) : (
+        <Chat socket={socket} username={username} room={room} />
+      )}
     </div>
   );
 }

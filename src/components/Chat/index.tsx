@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { ChatBody, ChatFooter, ChatHeader, ChatWindow } from "./styles";
+import {
+  ChatBody,
+  ChatFooter,
+  ChatHeader,
+  ChatWindow,
+  Message,
+  MessageContent,
+  MessageMeta,
+} from "./styles";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 type ChatTypes = {
   socket: SocketIOClient.Socket;
@@ -8,8 +17,16 @@ type ChatTypes = {
   room: string;
 };
 
+type MessageList = {
+  room: string;
+  user: string;
+  message: string;
+  time: string;
+};
+
 export default function Chat({ socket, username, room }: ChatTypes) {
   const [currentMsg, setCurrentMsg] = useState("");
+  const [messageList, setMessageList] = useState<MessageList[]>([]);
 
   const sendMsg = async () => {
     if (currentMsg !== "") {
@@ -23,12 +40,14 @@ export default function Chat({ socket, username, room }: ChatTypes) {
           new Date(Date.now()).getMinutes(),
       };
       await socket.emit("send_message", messageData);
+      setMessageList((list) => [...list, messageData]);
+      setCurrentMsg("");
     }
   };
 
   useEffect(() => {
-    socket.on("receive_message", (data: string) => {
-      console.log(data);
+    socket.on("receive_message", (data: MessageList) => {
+      setMessageList((list) => [...list, data]);
     });
   }, [socket]);
   return (
@@ -36,12 +55,35 @@ export default function Chat({ socket, username, room }: ChatTypes) {
       <ChatHeader>
         <p>Chat</p>
       </ChatHeader>
-      <ChatBody></ChatBody>
+      <ChatBody>
+        <ScrollToBottom className="message-container">
+          {messageList.map((message, index) => (
+            <Message
+              key={index}
+              messageStyling={username === message.user ? true : false}
+            >
+              <div>
+                <MessageContent>
+                  <p>{message.message}</p>
+                </MessageContent>
+                <MessageMeta>
+                  <p>{message.time}</p>
+                  <p>{message.user}</p>
+                </MessageMeta>
+              </div>
+            </Message>
+          ))}
+        </ScrollToBottom>
+      </ChatBody>
       <ChatFooter>
         <input
           type="text"
           placeholder="Ola"
+          value={currentMsg}
           onChange={(e) => setCurrentMsg(e.target.value)}
+          onKeyPress={(e) => {
+            e.key === "Enter" && sendMsg();
+          }}
         />
         <button onClick={sendMsg}>&#9658;</button>
       </ChatFooter>

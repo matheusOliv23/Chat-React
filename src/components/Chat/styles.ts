@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface MessageProps {
+  messageStyling: boolean;
+}
+
 export const ChatWindow = styled.div`
   width: 300px;
   height: 420px;
@@ -30,23 +34,48 @@ export const ChatBody = styled.div`
   border: 1px solid #263238;
   background: #fff;
   position: relative;
-`;
 
-export const MessageContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  .message-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
-export const Message = styled.div`
+export const Message = styled.div<MessageProps>`
   height: auto;
   padding: 10px;
   display: flex;
+
+  justify-content: ${(props) =>
+    props.messageStyling ? "flex-end" : "flex-start"};
+
+  #you {
+    justify-content: flex-start;
+  }
+
+  #other {
+    justify-content: flex-end;
+  }
+
+  #other .message-content {
+    justify-content: flex-end;
+    background-color: cornflowerblue;
+  }
+
+  #you .message-content {
+    justify-content: flex-start;
+  }
+
+  #you .message-meta {
+    justify-content: flex-start;
+    margin-left: 5px;
+  }
 `;
 
 export const MessageContent = styled.div`
@@ -65,6 +94,11 @@ export const MessageContent = styled.div`
   padding-left: 5px;
   overflow-wrap: break-word;
   word-break: break-word;
+`;
+
+export const MessageMeta = styled.div`
+  display: flex;
+  font-size: 12px;
 `;
 
 export const ChatFooter = styled.div`
@@ -102,3 +136,4 @@ export const ChatFooter = styled.div`
     }
   }
 `;
+
