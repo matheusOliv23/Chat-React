@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Chat from "components/Chat";
 import { socket } from "services/socket";
-import Room from "components/Room";
+import RoomLogin from "components/RoomLogin";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       {!showChat ? (
-        <Room
+        <RoomLogin
           username={username}
           setUsername={setUsername}
           room={room}
