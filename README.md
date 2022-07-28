@@ -13,6 +13,13 @@
 - Na aplicação, entre apenas com o nome de usuário e um nome para a sala. Desde que outros entrem na sala exata, será possivel o compartilhamento de mensagens em tempo real.
 
 
+## Minhas considerações e desafios nesse teste
+
+- Primeira vez que faço uma aplicação de chat. Confesso que achei bem divertido. É um tipo de aplicação bem interessante e sua lógica não é complicada de entender pois o Socket.io cuida de todo o envio das mensagens.
+- Tive um pouco de dificuldade ao integrar o MongoDB a este projeto pois eu não sabia muito bem o que eu tinha que fazer. Fiz várias pesquisas na internet e, no final, era mais simples do que parecia. A complexidade de um chat depende muito da quantidade de features da aplicação, fiz de uma maneira mais simples sem muita complexidade.
+
+No final, amei desenvolver essa aplicação. Me trouxe mais uma leve experiência fullstack e mais conhecimentos.
+
 ## 🚀 Tecnologias
 
 
