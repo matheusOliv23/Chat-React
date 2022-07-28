@@ -19,9 +19,9 @@ type ChatTypes = {
 
 type MessageList = {
   room: string;
-  user: string;
+  username: string;
   message: string;
-  time: string;
+  date: string;
 };
 
 export default function Chat({ socket, username, room }: ChatTypes) {
@@ -32,9 +32,9 @@ export default function Chat({ socket, username, room }: ChatTypes) {
     if (currentMsg !== "") {
       const messageData = {
         room: room,
-        user: username,
+        username: username,
         message: currentMsg,
-        time:
+        date:
           new Date(Date.now()).getHours() +
           ":" +
           new Date(Date.now()).getMinutes(),
@@ -60,15 +60,15 @@ export default function Chat({ socket, username, room }: ChatTypes) {
           {messageList.map((message, index) => (
             <Message
               key={index}
-              messageStyling={username === message.user ? true : false}
+              messageStyling={username === message.username ? true : false}
             >
               <div>
                 <MessageContent>
                   <p>{message.message}</p>
                 </MessageContent>
                 <MessageMeta>
-                  <p>{message.time}</p>
-                  <p>{message.user}</p>
+                  <p>{message.date}</p>
+                  <p>{message.username}</p>
                 </MessageMeta>
               </div>
             </Message>
