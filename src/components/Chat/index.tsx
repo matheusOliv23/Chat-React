@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 type ChatTypes = {
   socket: SocketIOClient.Socket;
@@ -6,14 +7,42 @@ type ChatTypes = {
   room: string;
 };
 
-export default function index({ socket, username, room }: ChatTypes) {
+export default function Chat({ socket, username, room }: ChatTypes) {
+  const [currentMsg, setCurrentMsg] = useState("");
+
+  const sendMsg = async () => {
+    if (currentMsg !== "") {
+      const messageData = {
+        room: room,
+        user: username,
+        message: currentMsg,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
+      await socket.emit("send_message", messageData);
+    }
+  };
+
+  useEffect(() => {
+    socket.on("receive_message", (data: string) => {
+      console.log(data);
+    });
+  }, [socket]);
   return (
     <div>
-      <p>Chat</p>
-      <div></div>
-      <div>
-        <input type="text" placeholder="Ola" />
-        <button>&#9658;</button>
+      <div className="chat-header">
+        <p>Chat</p>
+      </div>
+      <div className="chat-body"></div>
+      <div className="chat-footer">
+        <input
+          type="text"
+          placeholder="Ola"
+          onChange={(e) => setCurrentMsg(e.target.value)}
+        />
+        <button onClick={sendMsg}>&#9658;</button>
       </div>
     </div>
   );
