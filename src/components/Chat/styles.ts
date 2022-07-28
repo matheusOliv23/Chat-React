@@ -5,9 +5,13 @@ interface MessageProps {
 }
 
 export const ChatWindow = styled.div`
-  width: 300px;
-  height: 420px;
-
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 2rem;
+  background-color: black;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border: none;
   p {
     margin: 0;
   }
@@ -19,6 +23,7 @@ export const ChatHeader = styled.div`
   background: #263238;
   position: relative;
   cursor: pointer;
+  background-color: #252329;
 
   p {
     display: block;
@@ -30,7 +35,7 @@ export const ChatHeader = styled.div`
 `;
 
 export const ChatBody = styled.div`
-  height: calc(450px - (45px + 70px));
+  height: calc(600px - (45px + 70px));
   border: 1px solid #263238;
   background: #fff;
   position: relative;
@@ -40,9 +45,20 @@ export const ChatBody = styled.div`
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
+    background-color: #443f49;
+    color: wheat;
 
     &::-webkit-scrollbar {
       display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      background-color: black;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: red;
+      border-radius: 10px;
     }
   }
 `;
@@ -74,20 +90,21 @@ export const Message = styled.div<MessageProps>`
 
   #you .message-meta {
     justify-content: flex-start;
-    margin-left: 5px;
   }
 `;
 
-export const MessageContent = styled.div`
+export const MessageContent = styled.div<MessageProps>`
   width: auto;
   height: auto;
   min-height: 40px;
   max-width: 120px;
-  background-color: #43a047;
+  background-color: ${(props) =>
+    props.messageStyling ? "#319212" : "#2BA9CE"};
   border-radius: 5px;
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-right: 5px;
   margin-left: 5px;
   padding-right: 5px;
@@ -103,9 +120,8 @@ export const MessageMeta = styled.div`
 
 export const ChatFooter = styled.div`
   height: 40px;
-  border: 1px solid #263238;
-  border-top: none;
   display: flex;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
 
   input {
     height: 100%;
@@ -114,9 +130,10 @@ export const ChatFooter = styled.div`
     padding: 0 0.7em;
     font-size: 1em;
     border-right: 1px dotted #607d8b;
-
+    font-family: "Roboto", sans-serif;
     outline: none;
-    font-family: "Open Sans", sans-serif;
+    background-color: black;
+    color: white;
   }
 
   button {
@@ -126,13 +143,13 @@ export const ChatFooter = styled.div`
     cursor: pointer;
     flex: 15%;
     height: 100%;
-    background: transparent;
+    background: #5803c7;
     outline: none;
     font-size: 25px;
-    color: lightgray;
+    color: white;
 
     &:hover {
-      color: #43a047;
+      color: #607d8b;
     }
   }
 `;
