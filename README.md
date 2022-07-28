@@ -21,17 +21,6 @@
 - [Styled-components](https://styled-components.com/)
 
 
-
-
-## ✋🏻 Pré-requisitos
-
-
-- [Node.js](https://nodejs.org/en/)
-- [Yarn](classic.yarnpkg.com/en/docs/install)
-
-
-
-
 ## 🔥 Instalação e execução
 
 
