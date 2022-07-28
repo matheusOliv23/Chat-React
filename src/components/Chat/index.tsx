@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { ChatBody, ChatFooter, ChatHeader, ChatWindow } from "./styles";
 
 type ChatTypes = {
   socket: SocketIOClient.Socket;
@@ -31,19 +32,19 @@ export default function Chat({ socket, username, room }: ChatTypes) {
     });
   }, [socket]);
   return (
-    <div>
-      <div className="chat-header">
+    <ChatWindow>
+      <ChatHeader>
         <p>Chat</p>
-      </div>
-      <div className="chat-body"></div>
-      <div className="chat-footer">
+      </ChatHeader>
+      <ChatBody></ChatBody>
+      <ChatFooter>
         <input
           type="text"
           placeholder="Ola"
           onChange={(e) => setCurrentMsg(e.target.value)}
         />
         <button onClick={sendMsg}>&#9658;</button>
-      </div>
-    </div>
+      </ChatFooter>
+    </ChatWindow>
   );
 }

@@ -23,6 +23,10 @@ export const JoinChatContainer = styled.div`
     background: #43a047;
     color: #fff;
     cursor: pointer;
+
+    &:hover {
+      background: #2e7d32;
+    }
   }
 `;
 
