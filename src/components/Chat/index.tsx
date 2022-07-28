@@ -40,8 +40,7 @@ export default function Chat({ socket, username, room }: ChatTypes) {
           message: currentMsg,
           date: new Date(Date.now()).getHours() + ":" + getMinutesWithZero,
         };
-        await socket.emit("send_message", messageData);
-        //await socket.emit("output-message", messageData);
+        await socket.emit("send_message", messageData);     
         setMessageList((list) => [...list, messageData]);
         setCurrentMsg("");
       }
