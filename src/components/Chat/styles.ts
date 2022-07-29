@@ -70,27 +70,6 @@ export const Message = styled.div<MessageProps>`
 
   justify-content: ${(props) =>
     props.messageStyling ? "flex-end" : "flex-start"};
-
-  #you {
-    justify-content: flex-start;
-  }
-
-  #other {
-    justify-content: flex-end;
-  }
-
-  #other .message-content {
-    justify-content: flex-end;
-    background-color: cornflowerblue;
-  }
-
-  #you .message-content {
-    justify-content: flex-start;
-  }
-
-  #you .message-meta {
-    justify-content: flex-start;
-  }
 `;
 
 export const MessageContent = styled.div<MessageProps>`
