@@ -72,7 +72,9 @@ export default function Chat({ socket, username, room }: ChatTypes) {
                     <p>{message.message}</p>
                   </MessageContent>
                   <MessageMeta>
-                    <p>Enviado às {message.date}</p>
+                    <p>
+                      Enviado às {message.date} por {message.username}
+                    </p>
                   </MessageMeta>
                 </div>
               </Message>
